@@ -1,11 +1,20 @@
 require('dotenv').config();
 
-// express
+// EXPRESS
 const express = require('express');
 const app = express();
 
-// database
+// MIDDLEWARE
+app.use(express.json());
+
+// DATABASE
 const connectDB = require('./db/connect');
+
+// IMPORT ROUTES
+const articles = require('./routes/articles');
+
+// SET ROUTES
+app.use('/api/v1', articles);
 
 const port = process.env.PORT || 5500;
 const start = async () => {
