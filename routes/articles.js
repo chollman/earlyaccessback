@@ -6,9 +6,10 @@ const {
   getAllArticles,
   getArticle,
   deleteArticle,
+  updateArticle,
 } = require('../controllers/articles');
 
 router.route('/').get(getAllArticles).post(createArticle);
-router.route('/:id').get(getArticle).delete(deleteArticle);
+router.route('/:id').get(getArticle).delete(deleteArticle).patch(updateArticle);
 
 module.exports = router;
