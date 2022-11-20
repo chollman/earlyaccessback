@@ -39,3 +39,21 @@ exports.getArticle = async (req, res) => {
     });
   }
 };
+
+exports.deleteArticle = async (req, res) => {
+  try {
+    const article = await Article.findOneAndDelete({ _id: req.params.id });
+
+    if (!article) {
+      return res
+        .status(404)
+        .json({ msg: `No article with ID: ${req.params.id}` });
+    }
+
+    res.status(200).json({ article });
+  } catch (error) {
+    return res.status(400).json({
+      msg: error,
+    });
+  }
+};
