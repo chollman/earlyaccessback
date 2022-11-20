@@ -14,7 +14,7 @@ const connectDB = require('./db/connect');
 const articles = require('./routes/articles');
 
 // SET ROUTES
-app.use('/api/v1', articles);
+app.use('/api/v1/articles', articles);
 
 const port = process.env.PORT || 5500;
 const start = async () => {
