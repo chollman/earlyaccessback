@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const mongoose = require('mongoose')
+const { Schema } = mongoose
 
 const articleSchema = new Schema(
   {
@@ -15,6 +15,6 @@ const articleSchema = new Schema(
     image: { data: Buffer, contentType: String },
   },
   { timestamps: true }
-);
+)
 
-module.exports = mongoose.model('article', articleSchema);
+module.exports = mongoose.model('article', articleSchema)

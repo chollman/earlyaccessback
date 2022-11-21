@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
 const {
   createArticle,
@@ -7,9 +7,9 @@ const {
   getArticle,
   deleteArticle,
   updateArticle,
-} = require('../controllers/articles');
+} = require('../controllers/articles')
 
-router.route('/').get(getAllArticles).post(createArticle);
-router.route('/:id').get(getArticle).delete(deleteArticle).patch(updateArticle);
+router.route('/').get(getAllArticles).post(createArticle)
+router.route('/:id').get(getArticle).delete(deleteArticle).patch(updateArticle)
 
-module.exports = router;
+module.exports = router
