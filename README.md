@@ -1,5 +1,5 @@
 # EARLY ACCESS BACKEND
 
-## Para resetear la DB correr el siguiente comando:
+Para resetear la DB correr el siguiente comando:
 
 ### `node .\db\populate.js`
