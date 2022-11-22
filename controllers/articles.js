@@ -14,7 +14,7 @@ const createArticle = async (req, res) => {
 const getAllArticles = async (req, res) => {
   try {
     const articles = await Article.find()
-    res.status(200).json({ articles })
+    res.status(200).json({ amount: articles.length, articles })
   } catch (error) {
     return res.status(400).json({
       msg: error,

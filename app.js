@@ -3,6 +3,7 @@ require('dotenv').config()
 // EXPRESS
 const express = require('express')
 const app = express()
+const notFound = require('./middleware/not-found')
 
 // MIDDLEWARE
 app.use(express.json())
@@ -15,6 +16,8 @@ const articles = require('./routes/articles')
 
 // SET ROUTES
 app.use('/api/v1/articles', articles)
+
+app.use(notFound)
 
 const port = process.env.PORT || 5500
 const start = async () => {
