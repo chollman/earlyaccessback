@@ -1,8 +1,10 @@
 require('dotenv').config()
+require('express-async-errors')
 
 // EXPRESS
 const express = require('express')
 const app = express()
+
 const notFound = require('./middleware/not-found')
 
 // MIDDLEWARE
@@ -12,10 +14,10 @@ app.use(express.json())
 const connectDB = require('./db/connect')
 
 // IMPORT ROUTES
-const articles = require('./routes/articles')
+const articlesRouter = require('./routes/articles')
 
 // SET ROUTES
-app.use('/api/v1/articles', articles)
+app.use('/api/v1/articles', articlesRouter)
 
 app.use(notFound)
 

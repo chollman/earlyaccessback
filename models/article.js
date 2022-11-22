@@ -11,7 +11,7 @@ const articleSchema = new Schema(
     description: { type: String, trim: true },
     content: { type: String, trim: true },
     author: { type: String, trim: true },
-    publicationDate: { type: Date },
+    publicationDate: { type: Date, default: Date.now() },
     image: { data: Buffer, contentType: String },
   },
   { timestamps: true }
