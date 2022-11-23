@@ -47,6 +47,51 @@ paths:
       summary: GetAllArticles
       operationId: GetAllArticles
       parameters:
+        - name: title
+          in: query
+          description: ''
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: Musk
+        - name: content
+          in: query
+          description: ''
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: more
+        - name: sort
+          in: query
+          description: ''
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: author,-title
+        - name: fields
+          in: query
+          description: ''
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: author,title
+        - name: limit
+          in: query
+          description: ''
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: number
+            example: 5
         - name: numericFilters
           in: query
           description: ''
@@ -64,7 +109,7 @@ paths:
           explode: true
           schema:
             type: number
-            example:
+            example: 1
       responses:
         '200':
           description: ''
