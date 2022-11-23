@@ -7,6 +7,11 @@ const cors = require('cors')
 const xss = require('xss-clean')
 const rateLimiter = require('express-rate-limit')
 
+// SWAGGER
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
+
 // EXPRESS
 const express = require('express')
 const app = express()
@@ -33,6 +38,11 @@ const connectDB = require('./db/connect')
 // IMPORT ROUTES
 const authRouter = require('./routes/auth')
 const articlesRouter = require('./routes/articles')
+
+app.get('/', (req, res) => {
+  res.send('<h1>Early Access API</h1><a href="/api-docs">Documentación</a>')
+})
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 // SET ROUTES
 app.use('/api/v1/auth', authRouter)

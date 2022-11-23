@@ -1,0 +1,287 @@
+openapi: 3.0.0
+info:
+  title: EarlyAccess API
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://earlyaccess-api.onrender.com/api/v1
+    variables: {}
+paths:
+  /articles:
+    post:
+      tags:
+        - Articles
+      summary: CreateArticle
+      operationId: CreateArticle
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateArticleRequest'
+                - example:
+                    title: Cuentos de la cripta 5
+                    description: La serie de Magic Kids de terror que estaba re piola
+                    content: La serie de Magic Kids de terror que estaba re piola. Pero recontra piola
+                    publicationDate: 11/18/2022
+                    author: Claudito
+                    image: Te la debo
+            example:
+              title: Cuentos de la cripta 5
+              description: La serie de Magic Kids de terror que estaba re piola
+              content: La serie de Magic Kids de terror que estaba re piola. Pero recontra piola
+              publicationDate: 11/18/2022
+              author: Claudito
+              image: Te la debo
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Articles
+      summary: GetAllArticles
+      operationId: GetAllArticles
+      parameters:
+        - name: numericFilters
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: rating=10
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /articles/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The article ID
+    get:
+      tags:
+        - Articles
+      summary: GetArticle
+      operationId: GetArticle
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    delete:
+      tags:
+        - Articles
+      summary: DeleteArticle
+      operationId: DeleteArticle
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+        - Articles
+      summary: UpdateArticle
+      operationId: UpdateArticle
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateArticleRequest'
+                - example:
+                    title: Esta es la mejor noticia
+            example:
+              title: Esta es la mejor noticia
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/RegisterUserRequest'
+                - example:
+                    name: Test
+                    email: test@gmail.com
+                    password: '12345'
+            example:
+              name: Test
+              email: test@gmail.com
+              password: '12345'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/LoginRequest'
+                - example:
+                    email: chollman@gmail.com
+                    password: '1234'
+            example:
+              email: chollman@gmail.com
+              password: '1234'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    CreateArticleRequest:
+      title: CreateArticleRequest
+      required:
+        - title
+        - description
+        - content
+        - publicationDate
+        - author
+        - image
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+        publicationDate:
+          type: string
+        author:
+          type: string
+        image:
+          type: string
+      example:
+        title: Cuentos de la cripta 5
+        description: La serie de Magic Kids de terror que estaba re piola
+        content: La serie de Magic Kids de terror que estaba re piola. Pero recontra piola
+        publicationDate: 11/18/2022
+        author: Claudito
+        image: Te la debo
+    DeleteArticleRequest:
+      title: DeleteArticleRequest
+      required:
+        - title
+        - description
+        - content
+        - publicationDate
+        - author
+        - image
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+        publicationDate:
+          type: string
+        author:
+          type: string
+        image:
+          type: string
+      example:
+        title: La noticia que te va a volar el coco
+        description: Esta noticia te va a volar el mate posta. Leela, no seas boludo
+        content: Puto el que lee
+        publicationDate: 11/19/2022
+        author: Claudio
+        image: Te la debo
+    UpdateArticleRequest:
+      title: UpdateArticleRequest
+      required:
+        - title
+      type: object
+      properties:
+        title:
+          type: string
+      example:
+        title: Esta es la mejor noticia
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Test
+        email: test@gmail.com
+        password: '12345'
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: chollman@gmail.com
+        password: '1234'
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Articles
+  - name: Auth
