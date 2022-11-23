@@ -13,6 +13,7 @@ const articleSchema = new Schema(
     author: { type: String, trim: true },
     publicationDate: { type: Date, default: Date.now() },
     image: { data: Buffer, contentType: String },
+    rating: { type: Number },
   },
   { timestamps: true }
 )

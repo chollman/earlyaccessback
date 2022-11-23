@@ -9,6 +9,7 @@ const articles = [
     publicationDate: '2022-11-10T01:08:36Z',
     content:
       'The Twitter "Official" label that showed up on the platform yesterday as a way to fix an arguably unbroken verification system has apparently disappeared from many accounts in less than 24 hours.\r\nPl… [+3971 chars]',
+    rating: 2,
   },
   {
     author: 'Michael Cantu',
@@ -21,6 +22,7 @@ const articles = [
     publicationDate: '2022-11-10T01:05:17Z',
     content:
       'Driving range is one of the most important factors for most shoppers in the market for an electric vehicle. The term range anxiety has been synonymous with EVs for most of their existence, but that s… [+4539 chars]',
+    rating: 5,
   },
   {
     author: 'Guest Contributor',
@@ -33,6 +35,7 @@ const articles = [
     publicationDate: '2022-11-10T01:03:53Z',
     content:
       'As the price tags on electric vehicles remain out of reach for many consumers, some have elected to buy used Teslas to save money. The price of a used Tesla can vary significantly, depending on which… [+3924 chars]',
+    rating: 10,
   },
   {
     author: 'bizberg',
@@ -45,9 +48,10 @@ const articles = [
     publicationDate: '2022-11-10T01:02:07Z',
     content:
       "Tesla shares slid to their lowest level in nearly two years on Wednesday. Chief Executive Elon Musk disclosed he sold another $3.95 billion worth of shares. Musk's latest share sale fueled jitters ab… [+1339 chars]",
+    rating: 3,
   },
   {
-    author: 'Stone Fox Capital',
+    author: 'Dan',
     title: 'Velodyne Lidar: Better With Ouster',
     description:
       'Velodyne Lidar and Ouster agree to a merger of equals. While risks are elevated in the sector, see why we think VLDR and OUST stocks are a bargain.',
@@ -57,6 +61,7 @@ const articles = [
     publicationDate: '2022-11-10T01:00:59Z',
     content:
       'Ethan Miller\r\nIn a rather surprising move, Ouster (OUST) agreed to a deal with Velodyne Lidar (NASDAQ:VLDR) in a merger of equals. The Lidar sensor space offers substantial potential with the biggest… [+7160 chars]',
+    rating: 10,
   },
   {
     author: 'SA Transcripts',
@@ -69,6 +74,7 @@ const articles = [
     publicationDate: '2022-11-10T00:58:05Z',
     content:
       'Rivian Automotive, Inc. (NASDAQ:RIVN) Q3 2022 Earnings Conference Call November 9, 2022 5:00 PM ET\r\n Company Participants\r\n Tim Bei - VP, IR and Strategic Finance\r\n RJ Scaringe - Founder, Chairman an… [+49661 chars]',
+    rating: 9,
   },
   {
     author: 'Reuters',
@@ -81,6 +87,7 @@ const articles = [
     publicationDate: '2022-11-10T00:56:31Z',
     content:
       'Wall Street ended sharply lower on Wednesday as Republican gains in midterm elections appeared more modest than some expected, with investors also focusing on upcoming inflation data that will provid… [+3151 chars]',
+    rating: 5,
   },
   {
     author: 'Dan',
@@ -94,6 +101,7 @@ const articles = [
     publicationDate: '2022-11-10T00:53:27Z',
     content:
       'Some stories and deals dont get their own post, but should get some coverage. Here are some quick takes on stories that caught my eye. Lets hear your thoughts about them in the comments below!\r\nView … [+23587 chars]',
+    rating: 6,
   },
   {
     author: 'Staff and agencies',
@@ -107,6 +115,7 @@ const articles = [
     publicationDate: '2022-11-10T00:53:17Z',
     content:
       'Joe Biden thinks Twitter boss Elon Musks relationships with other countries is worthy of being looked at.\r\nBiden was asked at a news conference on Wednesday whether he thought Musk was a threat to na… [+2541 chars]',
+    rating: 4,
   },
   {
     author: 'Daily Hodl Staff',
@@ -120,9 +129,10 @@ const articles = [
     publicationDate: '2022-11-10T00:50:47Z',
     content:
       'A popular crypto analyst says the best altcoins to accumulate right now include Solana (SOL), Polygon (MATIC) and five Ethereum (ETH) rivals.\r\nIn a new strategy video, the host of InvestAnswers says … [+2350 chars]',
+    rating: 10,
   },
   {
-    author: 'cue',
+    author: 'Dan',
     title: "Biden says Musk's ties to other nations 'worth being looked at'",
     description:
       'Sources say the Biden administration have discussed whether to subject Mr Musk’s ventures to national security reviews.\n Read more at straitstimes.com.',
@@ -132,6 +142,7 @@ const articles = [
     publicationDate: '2022-11-10T00:47:34Z',
     content:
       'WASHINGTON President Joe Biden said Mr Elon Musks relationships with other countries are worthy of being looked at, though he declined to say whether the worlds richest man was doing anything inappro… [+1654 chars]',
+    rating: 7,
   },
   {
     author: 'Rachel Lang',
@@ -145,6 +156,7 @@ const articles = [
     publicationDate: '2022-11-10T00:42:41Z',
     content:
       "Elon Musk has been honoured in what could possibly be the strangest way ever.\r\nThe world's richest man has been hailed as the GOAT, which usually stands for the Greatest Of All Time, by a group of fa… [+2163 chars]",
+    rating: 1,
   },
   {
     author: 'postman',
@@ -156,6 +168,7 @@ const articles = [
     publicationDate: '2022-11-09T21:02:03Z',
     content:
       'Tesla shares dropped more than 6% in recent reading, continuing a punishing stretch. The stock is down about 55% from its high and is on track to close with a valuation below $600 billion for the fir… [+719 chars]',
+    rating: 10,
   },
 ]
 
