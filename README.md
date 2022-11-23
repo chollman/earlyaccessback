@@ -6,4 +6,4 @@ Correr el server en modo desarrollo:
 
 Para resetear la DB correr el siguiente comando:
 
-### `node .\db\populate.js`
+### `node ./db/populate.js`

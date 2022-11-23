@@ -1,3 +1,5 @@
+const User = require('../models/User')
+
 const login = async (req, res) => {
   const { user, password } = req.body
 
@@ -8,11 +10,11 @@ const login = async (req, res) => {
   res.status(200).send('logueaste papaaaaaa!')
 }
 
-const signin = async (req, res) => {
-  res.status(200).send('logueaste papaaaaaa!')
+const register = async (req, res) => {
+  res.json(req.body)
 }
 
 module.exports = {
-  signin,
+  register,
   login,
 }

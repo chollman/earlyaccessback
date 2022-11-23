@@ -1,4 +1,4 @@
-const Article = require('../models/article')
+const Article = require('../models/Article')
 
 const ARTICLES_PER_PAGE = 10
 

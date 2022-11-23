@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const connectDB = require('./connect')
-const Article = require('../models/article')
+const Article = require('../models/Article')
 
 const articlesJSON = require('./articlesFixtures')
 
