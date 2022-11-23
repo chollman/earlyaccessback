@@ -1,12 +1,10 @@
 const Article = require('../models/Article')
+const { StatusCodes } = require('http-status-codes')
+const { BadRequestError, NotFoundError } = require('../errors')
 
 const ARTICLES_PER_PAGE = 10
 
-const createArticle = async (req, res) => {
-  const article = await Article.create(req.body)
-  res.status(201).json({ article })
-}
-
+// GET ALL ARTICLES with sort, limit, fields, pagination =================
 const getAllArticles = async (req, res) => {
   const query = req.query
 
@@ -33,7 +31,6 @@ const getAllArticles = async (req, res) => {
       }
     })
   }
-  console.log(query)
 
   let result = Article.find(query)
 
@@ -58,29 +55,27 @@ const getAllArticles = async (req, res) => {
   result = result.skip(skip).limit(limit)
 
   const articles = await result
-  res.status(200).json({ amount: articles.length, articles })
+  res.status(StatusCodes.OK).json({ amount: articles.length, articles })
 }
 
+// GET ARTICLE ==================================================
 const getArticle = async (req, res) => {
   const article = await Article.findOne({ _id: req.params.id })
 
   if (!article) {
-    return res.status(404).json({ msg: `No article with ID: ${req.params.id}` })
+    throw new NotFoundError(`No article with id ${req.params.id}`)
   }
 
-  res.status(200).json({ article })
+  res.status(StatusCodes.OK).json({ article })
 }
 
-const deleteArticle = async (req, res) => {
-  const article = await Article.findOneAndDelete({ _id: req.params.id })
-
-  if (!article) {
-    return res.status(404).json({ msg: `No article with ID: ${req.params.id}` })
-  }
-
-  res.status(200).json({ article })
+// CREATE ARTICLE ==================================================
+const createArticle = async (req, res) => {
+  const article = await Article.create(req.body)
+  res.status(StatusCodes.CREATED).json({ article })
 }
 
+// UPDATE ARTICLE ==================================================
 const updateArticle = async (req, res) => {
   const article = await Article.findOneAndUpdate(
     { _id: req.params.id },
@@ -89,12 +84,24 @@ const updateArticle = async (req, res) => {
   )
 
   if (!article) {
-    return res.status(404).json({ msg: `No article with ID: ${req.params.id}` })
+    throw new NotFoundError(`No article with id ${req.params.id}`)
   }
 
-  res.status(200).json({ article })
+  res.status(StatusCodes.OK).json({ article })
 }
 
+// DELETE ARTICLE ==================================================
+const deleteArticle = async (req, res) => {
+  const article = await Article.findOneAndDelete({ _id: req.params.id })
+
+  if (!article) {
+    throw new NotFoundError(`No article with id ${req.params.id}`)
+  }
+
+  res.status(StatusCodes.OK).json({ article })
+}
+
+// UTILS ===========================================================
 const getRegex = (query, list) => {
   list.map((attr) => {
     if (query[attr]) {
