@@ -14,8 +14,13 @@ const articleSchema = new Schema(
     publicationDate: { type: Date, default: Date.now() },
     image: { data: Buffer, contentType: String },
     rating: { type: Number },
+    createdBy: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'Please provide user'],
+    },
   },
   { timestamps: true }
 )
 
-module.exports = mongoose.model('article', articleSchema)
+module.exports = mongoose.model('Article', articleSchema)

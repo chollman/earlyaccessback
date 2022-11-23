@@ -71,6 +71,7 @@ const getArticle = async (req, res) => {
 
 // CREATE ARTICLE ==================================================
 const createArticle = async (req, res) => {
+  req.body.createdBy = req.user.userId
   const article = await Article.create(req.body)
   res.status(StatusCodes.CREATED).json({ article })
 }
@@ -98,7 +99,7 @@ const deleteArticle = async (req, res) => {
     throw new NotFoundError(`No article with id ${req.params.id}`)
   }
 
-  res.status(StatusCodes.OK).json({ article })
+  res.status(StatusCodes.OK).json({ deletedArticle: article })
 }
 
 // UTILS ===========================================================

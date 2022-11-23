@@ -7,7 +7,7 @@ const app = express()
 
 // MIDDLEWARE
 const notFound = require('./middleware/not-found')
-//const authMiddleware = require('./middleware/auth')
+const errorHandlerMiddleware = require('./middleware/error-handler')
 app.use(express.json())
 
 // DATABASE
@@ -21,7 +21,9 @@ const articlesRouter = require('./routes/articles')
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/articles', articlesRouter)
 
+// If request to a different route we set not found on response with notFound middleware
 app.use(notFound)
+app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT || 5500
 const start = async () => {
