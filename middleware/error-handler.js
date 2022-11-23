@@ -5,11 +5,6 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
     message: err.message || 'Something went wrong try again later',
   }
-
-  // if (err instanceof CustomAPIError) {
-  //   return res.status(err.statusCode).json({ message: err.message })
-  // }
-
   if (err.name === 'ValidationError') {
     customError.message = Object.values(err.errors)
       .map((item) => item.message)
