@@ -5,9 +5,9 @@ require('express-async-errors')
 const express = require('express')
 const app = express()
 
-const notFound = require('./middleware/not-found')
-
 // MIDDLEWARE
+const notFound = require('./middleware/not-found')
+const authMiddleware = require('./middleware/auth')
 app.use(express.json())
 
 // DATABASE
@@ -20,6 +20,9 @@ const articlesRouter = require('./routes/articles')
 // SET ROUTES
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/articles', articlesRouter)
+app.get('/api/v1/testing-auth', authMiddleware, (req, res) => {
+  res.status(200).send('funca piola')
+})
 
 app.use(notFound)
 
