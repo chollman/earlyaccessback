@@ -50,12 +50,21 @@ paths:
         - name: numericFilters
           in: query
           description: ''
-          required: true
+          required: false
           style: form
           explode: true
           schema:
             type: string
             example: rating=10
+        - name: page
+          in: query
+          description: ''
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: number
+            example:
       responses:
         '200':
           description: ''
