@@ -14,9 +14,11 @@ app.use(express.json())
 const connectDB = require('./db/connect')
 
 // IMPORT ROUTES
+const authRouter = require('./routes/auth')
 const articlesRouter = require('./routes/articles')
 
 // SET ROUTES
+app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/articles', articlesRouter)
 
 app.use(notFound)
