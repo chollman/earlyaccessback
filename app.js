@@ -5,7 +5,6 @@ require('express-async-errors')
 const helmet = require('helmet')
 const cors = require('cors')
 const xss = require('xss-clean')
-//const rateLimiter = require('express-rate-limit')
 
 // SWAGGER
 const swaggerUI = require('swagger-ui-express')
@@ -21,13 +20,7 @@ const morgan = require('morgan')
 const notFound = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
-// app.set('trust proxy', 1)
-// app.use(
-//   rateLimiter({
-//     windowsMs: 15 * 60 * 1000, // 15 minutes
-//     max: 100, //limit each IP to 100 requests per windowMs
-//   })
-// )
+app.set('trust proxy', 1)
 app.use(morgan('tiny'))
 app.use(express.json())
 app.use(helmet())

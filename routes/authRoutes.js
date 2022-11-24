@@ -1,10 +1,17 @@
 const express = require('express')
 const router = express.Router()
+const rateLimiter = require('express-rate-limit')
 
 const { login, register, logout } = require('../controllers/authController')
 
-router.route('/register').post(register)
-router.route('/login').post(login)
+const apiLimiter = rateLimiter({
+  windowsMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, //limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this API',
+})
+
+router.route('/register').post(apiLimiter, register)
+router.route('/login').post(apiLimiter, login)
 router.route('/logout').get(logout)
 
 module.exports = router
