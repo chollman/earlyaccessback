@@ -17,9 +17,11 @@ const express = require('express')
 const app = express()
 
 // MIDDLEWARE
+const morgan = require('morgan')
 const notFound = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
+app.use(morgan('tiny'))
 app.set('trust proxy', 1)
 app.use(
   rateLimiter({
