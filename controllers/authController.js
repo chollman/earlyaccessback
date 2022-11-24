@@ -23,8 +23,12 @@ const login = async (req, res) => {
     throw new UnauthenticatedError('Wrong Password')
   }
 
-  const token = user.createJWT()
-  res.status(StatusCodes.OK).json({ user: { name: user.name }, token })
+  const tokenUser = { name: user.name, userId: user._id, role: user.role }
+  const token = createJWT({ payload: tokenUser })
+  res.status(StatusCodes.OK).json({
+    user: tokenUser,
+    token,
+  })
 }
 
 // Register new user
