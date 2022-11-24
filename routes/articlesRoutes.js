@@ -13,6 +13,10 @@ const {
 } = require('../controllers/articlesController')
 
 router.route('/').get(getAllArticles).post(authUser, createArticle)
-router.route('/:id').get(getArticle).delete(deleteArticle).patch(updateArticle)
+router
+  .route('/:id')
+  .get(getArticle)
+  .delete(authUser, deleteArticle)
+  .patch(authUser, updateArticle)
 
 module.exports = router
