@@ -10,7 +10,7 @@ const {
   getArticle,
   deleteArticle,
   updateArticle,
-} = require('../controllers/articles')
+} = require('../controllers/articlesController')
 
 router.route('/').get(getAllArticles).post(authUser, createArticle)
 router.route('/:id').get(getArticle).delete(deleteArticle).patch(updateArticle)

@@ -34,7 +34,12 @@ const register = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token })
 }
 
+const logout = async (req, res) => {
+  res.send('logout')
+}
+
 module.exports = {
   register,
   login,
+  logout,
 }
