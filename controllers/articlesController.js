@@ -58,7 +58,13 @@ const getAllArticles = async (req, res) => {
     path: 'createdBy',
     select: '-password',
   })
-  res.status(StatusCodes.OK).json({ amount: articles.length, articles })
+
+  const totalArticles = await Article.countDocuments(query)
+  const numOfPages = Math.ceil(totalArticles / limit)
+
+  res
+    .status(StatusCodes.OK)
+    .json({ amount: articles.length, totalArticles, numOfPages, articles })
 }
 
 // GET ARTICLE ==================================================
