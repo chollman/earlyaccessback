@@ -38,8 +38,8 @@ app.use(xss())
 const connectDB = require('./db/connect')
 
 // IMPORT ROUTES
-const authRouter = require('./routes/auth')
-const articlesRouter = require('./routes/articles')
+const authRouter = require('./routes/authRoutes')
+const articlesRouter = require('./routes/articlesRoutes')
 
 app.get('/', (req, res) => {
   res.send('<h1>Early Access API</h1><a href="/api-docs">Documentación</a>')
