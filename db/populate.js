@@ -3,7 +3,7 @@ require('dotenv').config()
 const connectDB = require('./connect')
 const Article = require('../models/Article')
 
-const articlesJSON = require('./articlesFixtures')
+const articlesJSON = require('./articles-mock.json')
 
 const start = async () => {
   try {
