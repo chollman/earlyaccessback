@@ -54,13 +54,19 @@ const getAllArticles = async (req, res) => {
   const skip = (page - 1) * limit
   result = result.skip(skip).limit(limit)
 
-  const articles = await result
+  const articles = await result.populate({
+    path: 'createdBy',
+    select: '-password',
+  })
   res.status(StatusCodes.OK).json({ amount: articles.length, articles })
 }
 
 // GET ARTICLE ==================================================
 const getArticle = async (req, res) => {
-  const article = await Article.findOne({ _id: req.params.id })
+  const article = await Article.findOne({ _id: req.params.id }).populate({
+    path: 'createdBy',
+    select: '-password',
+  })
 
   if (!article) {
     throw new NotFoundError(`No article with id ${req.params.id}`)
