@@ -1,7 +1,20 @@
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, UnauthenticatedError } = require('../errors')
-const { createJWT } = require('../utils')
+const { attachCookiesToResponse } = require('../utils')
+
+// Register new user
+const register = async (req, res) => {
+  const { name, email, password } = req.body
+  const user = await User.create({ name, email, password })
+  const tokenUser = { name: user.name, userId: user._id, role: user.role }
+
+  attachCookiesToResponse({ res, user: tokenUser })
+
+  res.status(StatusCodes.CREATED).json({
+    user: tokenUser,
+  })
+}
 
 // Login user
 const login = async (req, res) => {
@@ -24,27 +37,21 @@ const login = async (req, res) => {
   }
 
   const tokenUser = { name: user.name, userId: user._id, role: user.role }
-  const token = createJWT({ payload: tokenUser })
+
+  attachCookiesToResponse({ res, user: tokenUser })
+
   res.status(StatusCodes.OK).json({
     user: tokenUser,
-    token,
   })
 }
 
-// Register new user
-const register = async (req, res) => {
-  const { name, email, password } = req.body
-  const user = await User.create({ name, email, password })
-  const tokenUser = { name: user.name, userId: user._id, role: user.role }
-  const token = createJWT({ payload: tokenUser })
-  res.status(StatusCodes.CREATED).json({
-    user: tokenUser,
-    token,
-  })
-}
-
+// Logout user
 const logout = async (req, res) => {
-  res.send('logout')
+  res.cookie('token', 'logout', {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  })
+  res.status(StatusCodes.OK).json({ message: 'Logout success' })
 }
 
 module.exports = {
