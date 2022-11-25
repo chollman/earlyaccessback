@@ -15,6 +15,8 @@ const swaggerDocument = YAML.load('./swagger.yaml')
 const express = require('express')
 const app = express()
 
+const fileUpload = require('express-fileupload')
+
 // MIDDLEWARE
 const morgan = require('morgan')
 const notFound = require('./middleware/not-found')
@@ -26,6 +28,7 @@ app.use(express.json())
 app.use(helmet())
 app.use(cors())
 app.use(xss())
+app.use(fileUpload())
 
 // DATABASE
 const connectDB = require('./db/connect')
