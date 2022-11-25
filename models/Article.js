@@ -12,8 +12,9 @@ const articleSchema = new Schema(
     content: { type: String, trim: true },
     author: { type: String, trim: true },
     publicationDate: { type: Date, default: Date.now() },
-    image: { data: Buffer, contentType: String },
+    image: { type: String, default: '/uploads/example.jpeg' },
     rating: { type: Number },
+    status: { type: String, enum: ['draft', 'approved', 'published'] },
     createdBy: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
