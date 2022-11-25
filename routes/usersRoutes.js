@@ -9,7 +9,9 @@ const {
   updateUserPassword,
 } = require('../controllers/usersController')
 
-router.route('/').get(getAllUsers)
+const authUser = require('../middleware/auth')
+
+router.route('/').get(authUser, getAllUsers)
 router.route('/showme').get(showCurrentUser)
 router.route('/updateUser').patch(updateUser)
 router.route('/updateUserPassword').patch(updateUserPassword)
