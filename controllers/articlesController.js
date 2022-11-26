@@ -114,6 +114,11 @@ const deleteArticle = async (req, res) => {
   res.status(StatusCodes.OK).json({ deletedArticle: article })
 }
 
+// UPLOAD IMAGE ====================================================
+const uploadImage = async (req, res) => {
+  res.send('upload image')
+}
+
 // UTILS ===========================================================
 const getRegex = (query, list) => {
   list.map((attr) => {
@@ -130,4 +135,5 @@ module.exports = {
   getArticle,
   deleteArticle,
   updateArticle,
+  uploadImage,
 }

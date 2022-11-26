@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 // middlewares
-const { authUser } = require('../middleware/auth')
+const { authUser, authorizePermission } = require('../middleware/auth')
 
 const {
   createArticle,
@@ -12,11 +12,14 @@ const {
   updateArticle,
 } = require('../controllers/articlesController')
 
-router.route('/').get(getAllArticles).post(authUser, createArticle)
+router
+  .route('/')
+  .get(getAllArticles)
+  .post(authUser, authorizePermission('admin'), createArticle)
 router
   .route('/:id')
   .get(getArticle)
-  .delete(authUser, deleteArticle)
-  .patch(authUser, updateArticle)
+  .delete(authUser, authorizePermission('admin'), deleteArticle)
+  .patch(authUser, authorizePermission('admin'), updateArticle)
 
 module.exports = router
