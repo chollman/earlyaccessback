@@ -4,7 +4,7 @@ info:
   contact: {}
   version: 'v1'
 servers:
-  - url: http://https://earlyaccess-api.onrender.com/api/v1
+  - url: https://earlyaccess-api.onrender.com/api/v1
     variables: {}
 paths:
   /articles:
