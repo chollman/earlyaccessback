@@ -10,8 +10,8 @@ const {
   getArticle,
   deleteArticle,
   updateArticle,
-  uploadImage,
 } = require('../controllers/articlesController')
+const { uploadArticleImage } = require('../controllers/uploadsController')
 
 router
   .route('/')
@@ -19,7 +19,7 @@ router
   .post(authUser, authorizePermission('admin'), createArticle)
 router
   .route('/uploadImage')
-  .post(authUser, authorizePermission('admin'), uploadImage)
+  .post(authUser, authorizePermission('admin'), uploadArticleImage)
 router
   .route('/:id')
   .get(getArticle)
