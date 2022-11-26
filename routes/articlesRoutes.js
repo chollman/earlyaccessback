@@ -10,12 +10,16 @@ const {
   getArticle,
   deleteArticle,
   updateArticle,
+  uploadImage,
 } = require('../controllers/articlesController')
 
 router
   .route('/')
   .get(getAllArticles)
   .post(authUser, authorizePermission('admin'), createArticle)
+router
+  .route('/uploadImage')
+  .post(authUser, authorizePermission('admin'), uploadImage)
 router
   .route('/:id')
   .get(getArticle)
