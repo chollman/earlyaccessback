@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
-  title: EarlyAccess API
+  title: EarlyAccess
   contact: {}
-  version: '1.0'
+  version: 'v1'
 servers:
-  - url: https://earlyaccess-api.onrender.com/api/v1
+  - url: http://https://earlyaccess-api.onrender.com/api/v1
     variables: {}
 paths:
   /articles:
@@ -47,83 +47,83 @@ paths:
       summary: GetAllArticles
       operationId: GetAllArticles
       parameters:
-        - name: title
-          in: query
-          description: ''
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: string
-            example: Musk
-        - name: content
-          in: query
-          description: ''
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: string
-            example: more
-        - name: sort
-          in: query
-          description: ''
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: string
-            example: author,-title
-        - name: fields
-          in: query
-          description: ''
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: string
-            example: author,title
-        - name: limit
-          in: query
-          description: ''
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: number
-            example: 5
         - name: numericFilters
           in: query
           description: ''
-          required: false
           style: form
           explode: true
           schema:
             type: string
             example: rating=10
-        - name: page
+        - name: author
           in: query
           description: ''
-          required: false
           style: form
           explode: true
           schema:
-            type: number
-            example: 1
+            type: string
+            default: Brandon
+        - name: page
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+            default: '1'
+        - name: title
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+            default: prueba
+        - name: content
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+            default: prueba
+        - name: sort
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+            default: author,-title
+        - name: fields
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+            default: author,title
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+            default: '10'
       responses:
         '200':
           description: ''
           headers: {}
       deprecated: false
-      security: []
   /articles/{id}:
     parameters:
       - in: path
-        name: id
+        name: articleId
         schema:
-          type: string
+          type: integer
         required: true
-        description: The article ID
+        description: Numeric ID of the article to get
     get:
       tags:
         - Articles
@@ -135,7 +135,6 @@ paths:
           description: ''
           headers: {}
       deprecated: false
-      security: []
     delete:
       tags:
         - Articles
@@ -147,6 +146,8 @@ paths:
           description: ''
           headers: {}
       deprecated: false
+      security:
+        - bearer: []
     patch:
       tags:
         - Articles
@@ -170,6 +171,8 @@ paths:
           description: ''
           headers: {}
       deprecated: false
+      security:
+        - bearer: []
   /auth/register:
     post:
       tags:
@@ -185,20 +188,19 @@ paths:
               allOf:
                 - $ref: '#/components/schemas/RegisterUserRequest'
                 - example:
-                    name: Test
-                    email: test@gmail.com
-                    password: '12345'
+                    name: Claudio
+                    email: claudiohollman@gmail.com
+                    password: '1234'
             example:
-              name: Test
-              email: test@gmail.com
-              password: '12345'
+              name: Claudio
+              email: claudiohollman@gmail.com
+              password: '1234'
         required: true
       responses:
         '200':
           description: ''
           headers: {}
       deprecated: false
-      security: []
   /auth/login:
     post:
       tags:
@@ -214,10 +216,10 @@ paths:
               allOf:
                 - $ref: '#/components/schemas/LoginRequest'
                 - example:
-                    email: chollman@gmail.com
+                    email: claudiohollman@gmail.com
                     password: '1234'
             example:
-              email: chollman@gmail.com
+              email: claudiohollman@gmail.com
               password: '1234'
         required: true
       responses:
@@ -225,7 +227,123 @@ paths:
           description: ''
           headers: {}
       deprecated: false
-      security: []
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logout
+      operationId: Logout
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users:
+    get:
+      tags:
+        - Users
+      summary: GetAllUsers
+      operationId: GetAllUsers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /users/{id}:
+    parameters:
+      - in: path
+        name: articleId
+        schema:
+          type: integer
+        required: true
+        description: Numeric ID of the user to get
+    get:
+      tags:
+        - Users
+      summary: GetSingleUser
+      operationId: GetSingleUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /users/showme:
+    get:
+      tags:
+        - Users
+      summary: GetCurrentUser
+      operationId: GetCurrentUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /users/updateUser:
+    patch:
+      tags:
+        - Users
+      summary: UpdateUser
+      operationId: UpdateUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateUserRequest'
+                - example:
+                    name: Bob
+                    email: bobby@gmail.com
+            example:
+              name: Bob
+              email: bobby@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /users/updateUserPassword:
+    patch:
+      tags:
+        - Users
+      summary: UpdateUserPassword
+      operationId: UpdateUserPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateUserPasswordRequest'
+                - example:
+                    oldPassword: '1234'
+                    newPassword: '12345'
+            example:
+              oldPassword: '1234'
+              newPassword: '12345'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
 components:
   schemas:
     CreateArticleRequest:
@@ -313,9 +431,9 @@ components:
         password:
           type: string
       example:
-        name: Test
-        email: test@gmail.com
-        password: '12345'
+        name: Claudio
+        email: claudiohollman@gmail.com
+        password: '1234'
     LoginRequest:
       title: LoginRequest
       required:
@@ -328,14 +446,42 @@ components:
         password:
           type: string
       example:
-        email: chollman@gmail.com
+        email: claudiohollman@gmail.com
         password: '1234'
+    UpdateUserRequest:
+      title: UpdateUserRequest
+      required:
+        - name
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      example:
+        name: Bob
+        email: bobby@gmail.com
+    UpdateUserPasswordRequest:
+      title: UpdateUserPasswordRequest
+      required:
+        - oldPassword
+        - newPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+      example:
+        oldPassword: '1234'
+        newPassword: '12345'
   securitySchemes:
-    httpBearer:
+    bearer:
       type: http
       scheme: bearer
-security:
-  - httpBearer: []
+security: []
 tags:
   - name: Articles
   - name: Auth
+  - name: Users
