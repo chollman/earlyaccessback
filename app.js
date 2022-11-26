@@ -16,6 +16,7 @@ const connectDB = require('./db/connect')
 // IMPORT ROUTES
 const authRouter = require('./routes/authRoutes')
 const articlesRouter = require('./routes/articlesRoutes')
+const usersRouter = require('./routes/usersRoutes')
 
 // SET ROUTES
 app.get('/', (req, res) => {
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/articles', articlesRouter)
+app.use('/api/v1/users', usersRouter)
 
 // If request to a different route we set not found on response with notFound middleware
 app.use(notFound)
