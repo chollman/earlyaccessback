@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, UnauthenticatedError } = require('../errors')
-const { attachCookiesToResponse } = require('../utils')
+const { createJWT } = require('../utils')
 
 // Register new user
 const register = async (req, res) => {
@@ -9,10 +9,11 @@ const register = async (req, res) => {
   const user = await User.create({ name, email, password })
   const tokenUser = { name: user.name, userId: user._id, role: user.role }
 
-  attachCookiesToResponse({ res, user: tokenUser })
+  const token = createJWT({ payload: tokenUser })
 
   res.status(StatusCodes.CREATED).json({
     user: tokenUser,
+    token,
   })
 }
 
@@ -37,25 +38,15 @@ const login = async (req, res) => {
   }
 
   const tokenUser = { name: user.name, userId: user._id, role: user.role }
-
-  attachCookiesToResponse({ res, user: tokenUser })
+  const token = createJWT({ payload: tokenUser })
 
   res.status(StatusCodes.OK).json({
     user: tokenUser,
+    token,
   })
-}
-
-// Logout user
-const logout = async (req, res) => {
-  res.cookie('token', 'logout', {
-    httpOnly: true,
-    expires: new Date(Date.now()),
-  })
-  res.status(StatusCodes.OK).json({ message: 'Logout success' })
 }
 
 module.exports = {
   register,
   login,
-  logout,
 }

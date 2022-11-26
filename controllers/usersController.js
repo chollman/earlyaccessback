@@ -5,9 +5,10 @@ const {
   NotFoundError,
   UnauthenticatedError,
 } = require('../errors')
-const { attachCookiesToResponse, checkPermissions } = require('../utils')
+const { createJWT, checkPermissions } = require('../utils')
 
 const getAllUsers = async (req, res) => {
+  console.log(req.user)
   const users = await User.find({ role: 'user' }).select('-password')
   res.status(StatusCodes.OK).json({ users })
 }
@@ -32,9 +33,9 @@ const updateUser = async (req, res) => {
     { email, name },
     { new: true, runValidators: true }
   )
+  const token = createJWT({ payload: tokenUser })
   const tokenUser = { name: user.name, userId: user._id, role: user.role }
-  attachCookiesToResponse({ res, user: tokenUser })
-  res.status(StatusCodes.OK).json({ user: tokenUser })
+  res.status(StatusCodes.OK).json({ user: tokenUser, token })
 }
 const updateUserPassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
